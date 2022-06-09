@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.1 Testes Unitários", "3.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.2 Testes de Integração", "3.2 Testes de Integração", "{B3B8B8C4-4077-4EE9-90F5-2C5674D8432E}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ControleMedicamentos.Projeto.BancoDados", "ControleMedicamentos.Projeto.BancoDados\ControleMedicamentos.Projeto.BancoDados.sqlproj", "{B48987DE-1ADA-49B3-8C79-DA35EAC5CB89}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ControleMedicamentos.Projeto.SqlServer", "ControleMedicamentos.Projeto.BancoDados\ControleMedicamentos.Projeto.SqlServer.sqlproj", "{B48987DE-1ADA-49B3-8C79-DA35EAC5CB89}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControleMedicamentos.Infra.BancoDados.Tests", "ControleMedicamentos.Infra.BancoDados.Tests\ControleMedicamentos.Infra.BancoDados.Tests.csproj", "{EE7ACE2D-CCC8-4921-A9E3-2A58865FFD15}"
 EndProject
