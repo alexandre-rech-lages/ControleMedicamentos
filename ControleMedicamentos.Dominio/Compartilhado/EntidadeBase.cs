@@ -2,7 +2,7 @@
 {
     public abstract class EntidadeBase<T>
     {
-        public int Numero { get; set; }
+        public int Id { get; set; }
 
 
     }
