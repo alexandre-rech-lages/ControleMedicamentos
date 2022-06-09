@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>ControleMedicamentos.Projeto.BancoDados</Name>
+    <Name>ControleMedicamentos.Projeto.SqlServer</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{b48987de-1ada-49b3-8c79-da35eac5cb89}</ProjectGuid>
