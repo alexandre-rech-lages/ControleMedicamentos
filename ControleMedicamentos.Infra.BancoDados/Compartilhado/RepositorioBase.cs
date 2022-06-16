@@ -4,13 +4,10 @@ using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ControleMedicamentos.Infra.BancoDados.Compartilhado
 {
-    public abstract class RepositorioBase<T, TValidador, TMapeador> 
+    public abstract class RepositorioBase<T, TValidador, TMapeador>
         where T : EntidadeBase<T>
         where TValidador : AbstractValidator<T>, new()
         where TMapeador : MapeadorBase<T>, new()
@@ -28,7 +25,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Compartilhado
 
         protected abstract string sqlSelecionarPorId { get; }
 
-        protected abstract string sqlSelecionarTodos { get; }       
+        protected abstract string sqlSelecionarTodos { get; }
 
         public ValidationResult Inserir(T registro)
         {

@@ -1,15 +1,11 @@
 ﻿using ControleMedicamentos.Dominio.ModuloPaciente;
 using ControleMedicamentos.Infra.BancoDados.Compartilhado;
-using FluentValidation.Results;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 
 namespace ControleMedicamentos.Infra.BancoDados.ModuloPaciente
 {
     public class RepositorioPacienteEmBancoDados :
         RepositorioBase<Paciente, ValidadorPaciente, MapeadorPaciente>
-    {        
+    {
         protected override string sqlInserir
         {
             get =>
@@ -69,6 +65,6 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloPaciente
 	            FROM 
 		            [TBPACIENTE]";
         }
-       
+
     }
 }

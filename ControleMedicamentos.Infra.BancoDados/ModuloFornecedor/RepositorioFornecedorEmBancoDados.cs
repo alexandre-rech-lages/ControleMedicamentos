@@ -1,15 +1,11 @@
 ﻿using ControleMedicamentos.Dominio.ModuloFornecedor;
 using ControleMedicamentos.Infra.BancoDados.Compartilhado;
-using FluentValidation.Results;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 
 namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
 {
     public class RepositorioFornecedorEmBancoDados :
         RepositorioBase<Fornecedor, ValidadorFornecedor, MapeadorFornecedor>
-    {        
+    {
         protected override string sqlInserir
         {
             get =>
@@ -83,7 +79,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
                 [ID] = @ID";
         }
 
-   
+
 
     }
 }

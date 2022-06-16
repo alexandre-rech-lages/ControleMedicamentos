@@ -1,9 +1,5 @@
 ﻿using ControleMedicamentos.Dominio.ModuloFuncionario;
 using ControleMedicamentos.Infra.BancoDados.Compartilhado;
-using FluentValidation.Results;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 
 namespace ControleMedicamentos.Infra.BancoDados.ModuloFuncionario
 {
@@ -72,6 +68,6 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFuncionario
 
         }
 
-       
+
     }
 }

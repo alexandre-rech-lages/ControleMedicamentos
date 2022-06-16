@@ -7,13 +7,13 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
     public class RepositorioMedicamentoEmBancoDados :
         RepositorioBase<Medicamento, ValidadorMedicamento, MapeadorMedicamento>
     {
-        protected override string sqlInserir => 
+        protected override string sqlInserir =>
             @"INSERT INTO TBMEDICAMENTO";
 
-        protected override string sqlEditar => 
+        protected override string sqlEditar =>
             "";
 
-        protected override string sqlExcluir => 
+        protected override string sqlExcluir =>
             "";
         protected override string sqlSelecionarPorId =>
             "";
