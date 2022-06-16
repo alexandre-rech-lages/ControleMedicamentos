@@ -15,6 +15,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
 
         protected override string sqlExcluir =>
             "";
+
         protected override string sqlSelecionarPorId =>
             "";
 

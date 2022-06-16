@@ -6,9 +6,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFuncionario
     public class RepositorioFuncionarioEmBancoDados :
         RepositorioBase<Funcionario, ValidadorFuncionario, MapeadorFuncionario>
     {
-        protected override string sqlInserir
-        {
-            get =>
+        protected override string sqlInserir =>
             @"INSERT INTO [TBFUNCIONARIO]
                 (
                     [NOME],       
@@ -21,29 +19,20 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFuncionario
                     @LOGIN,
                     @SENHA
                 ); SELECT SCOPE_IDENTITY();";
-        }
-
-        protected override string sqlEditar
-        {
-            get =>
+        
+        protected override string sqlEditar =>
             @" UPDATE [TBFUNCIONARIO]
                     SET 
                         [NOME] = @NOME, 
                         [LOGIN] = @LOGIN, 
                         [SENHA] = @SENHA
-                    WHERE [ID] = @ID";
-        }
+                    WHERE [ID] = @ID";        
 
-        protected override string sqlExcluir
-        {
-            get =>
+        protected override string sqlExcluir =>
             @"DELETE FROM [TBFUNCIONARIO] 
                     WHERE [ID] = @ID";
-        }
-
-        protected override string sqlSelecionarTodos
-        {
-            get =>
+        
+        protected override string sqlSelecionarTodos =>
             @"SELECT 
                 [ID],       
                 [NOME],
@@ -51,11 +40,8 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFuncionario
                 [SENHA]
             FROM
                 [TBFUNCIONARIO]";
-        }
 
-        protected override string sqlSelecionarPorId
-        {
-            get =>
+        protected override string sqlSelecionarPorId =>
             @"SELECT 
                 [ID],       
                 [NOME],
@@ -65,9 +51,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFuncionario
                 [TBFUNCIONARIO]
             WHERE 
                 [ID] = @ID";
-
-        }
-
-
     }
+
+
 }

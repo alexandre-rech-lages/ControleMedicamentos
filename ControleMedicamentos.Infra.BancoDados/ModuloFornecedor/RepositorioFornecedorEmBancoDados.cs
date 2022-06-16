@@ -6,9 +6,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
     public class RepositorioFornecedorEmBancoDados :
         RepositorioBase<Fornecedor, ValidadorFornecedor, MapeadorFornecedor>
     {
-        protected override string sqlInserir
-        {
-            get =>
+        protected override string sqlInserir =>
             @"INSERT INTO [TBFORNECEDOR]
                 (
                     [NOME],       
@@ -24,12 +22,9 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
                     @EMAIL,
                     @CIDADE,
                     @ESTADO
-                ); SELECT SCOPE_IDENTITY();";
-        }
+                ); SELECT SCOPE_IDENTITY();";        
 
-        protected override string sqlEditar
-        {
-            get =>
+        protected override string sqlEditar =>
             @" UPDATE [TBFORNECEDOR]
                     SET 
                         [NOME] = @NOME, 
@@ -38,20 +33,14 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
                         [CIDADE] = @CIDADE, 
                         [ESTADO] = @ESTADO
                     WHERE [ID] = @ID";
-        }
-
-        protected override string sqlExcluir
-        {
-            get =>
+        
+        protected override string sqlExcluir =>
             @"DELETE FROM [TBMEDICAMENTO]
                 WHERE [FORNECEDOR_ID] = @ID
                 DELETE FROM [TBFORNECEDOR] 
-                    WHERE [ID] = @ID";
-        }
+                    WHERE [ID] = @ID";        
 
-        protected override string sqlSelecionarTodos
-        {
-            get =>
+        protected override string sqlSelecionarTodos =>
             @"SELECT 
                 [ID],       
                 [NOME],
@@ -61,11 +50,8 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
                 [ESTADO]
             FROM
                 [TBFORNECEDOR]";
-        }
 
-        protected override string sqlSelecionarPorId
-        {
-            get =>
+        protected override string sqlSelecionarPorId =>
             @"SELECT 
                 [ID],       
                 [NOME],
@@ -77,9 +63,5 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
                 [TBFORNECEDOR]
             WHERE 
                 [ID] = @ID";
-        }
-
-
-
     }
 }
