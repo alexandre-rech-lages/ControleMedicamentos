@@ -22,7 +22,7 @@
             if (paciente == null)
                 return false;
 
-            return 
+            return
                 paciente.Id.Equals(Id) &&
                 paciente.Nome.Equals(Nome) &&
                 paciente.CartaoSUS.Equals(CartaoSUS);

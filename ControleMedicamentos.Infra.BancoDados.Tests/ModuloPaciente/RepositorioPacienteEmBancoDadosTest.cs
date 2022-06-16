@@ -1,11 +1,6 @@
 ﻿using ControleMedicamentos.Dominio.ModuloPaciente;
 using ControleMedicamentos.Infra.BancoDados.ModuloPaciente;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
 {
@@ -25,7 +20,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
 
         [TestMethod]
         public void Deve_inserir_novo_paciente()
-        {            
+        {
             //action
             repositorio.Inserir(paciente);
 
@@ -90,7 +85,6 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
             var p02 = new Paciente("Maria do Carmo", "321654987");
             var p03 = new Paciente("Patricia Amorim", "321654987");
 
-            var repositorio = new RepositorioPacienteEmBancoDados();
             repositorio.Inserir(p01);
             repositorio.Inserir(p02);
             repositorio.Inserir(p03);
@@ -99,7 +93,6 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
             var pacientes = repositorio.SelecionarTodos();
 
             //assert
-
             Assert.AreEqual(3, pacientes.Count);
 
             Assert.AreEqual(p01.Nome, pacientes[0].Nome);

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace ControleMedicamentos.Dominio.ModuloMedicamento
 {
     public class Medicamento : EntidadeBase<Medicamento>
-    {        
+    {
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public string Lote { get; set; }
@@ -15,7 +15,7 @@ namespace ControleMedicamentos.Dominio.ModuloMedicamento
 
         public List<Requisicao> Requisicoes { get; set; }
 
-        public Fornecedor Fornecedor{ get; set; }
+        public Fornecedor Fornecedor { get; set; }
 
         public int QuantidadeRequisicoes { get { return Requisicoes.Count; } }
 
