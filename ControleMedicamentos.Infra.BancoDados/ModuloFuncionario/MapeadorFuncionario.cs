@@ -7,19 +7,20 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFuncionario
 {
     public class MapeadorFuncionario : MapeadorBase<Funcionario>
     {
-        public override void ConfigurarParametros(Funcionario funcionario, SqlCommand comando)
+        public override void ConfigurarParametros(Funcionario registro, SqlCommand comando)
         {
-            comando.Parameters.AddWithValue("ID", funcionario.Id);
-            comando.Parameters.AddWithValue("NOME", funcionario.Nome);
-            comando.Parameters.AddWithValue("LOGIN", funcionario.Login);
-            comando.Parameters.AddWithValue("SENHA", funcionario.Senha);
+            comando.Parameters.AddWithValue("ID", registro.Id);
+            comando.Parameters.AddWithValue("NOME", registro.Nome);
+            comando.Parameters.AddWithValue("LOGIN", registro.Login);
+            comando.Parameters.AddWithValue("SENHA", registro.Senha);
         }
-        public override Funcionario ConverterRegistro(SqlDataReader leitorFuncionario)
+
+        public override Funcionario ConverterRegistro(SqlDataReader leitorRegistro)
         {
-            var id = Convert.ToInt32(leitorFuncionario["ID"]);
-            var nome = Convert.ToString(leitorFuncionario["NOME"]);
-            var login = Convert.ToString(leitorFuncionario["LOGIN"]);
-            var senha = Convert.ToString(leitorFuncionario["SENHA"]);
+            var id = Convert.ToInt32(leitorRegistro["FUNCIONARIO_ID"]);
+            var nome = Convert.ToString(leitorRegistro["FUNCIONARIO_NOME"]);
+            var login = Convert.ToString(leitorRegistro["FUNCIONARIO_LOGIN"]);
+            var senha = Convert.ToString(leitorRegistro["FUNCIONARIO_SENHA"]);
 
             Funcionario funcionario = new Funcionario();
             funcionario.Id = id;

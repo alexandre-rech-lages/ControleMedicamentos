@@ -34,19 +34,19 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFuncionario
         
         protected override string sqlSelecionarTodos =>
             @"SELECT 
-                [ID],       
-                [NOME],
-                [LOGIN],
-                [SENHA]
+                [ID] FUNCIONARIO_ID,       
+                [NOME] FUNCIONARIO_NOME,
+                [LOGIN] FUNCIONARIO_LOGIN,
+                [SENHA] FUNCIONARIO_SENHA
             FROM
                 [TBFUNCIONARIO]";
 
         protected override string sqlSelecionarPorId =>
             @"SELECT 
-                [ID],       
-                [NOME],
-                [LOGIN],
-                [SENHA]
+                [ID] FUNCIONARIO_ID,       
+                [NOME] FUNCIONARIO_NOME,
+                [LOGIN] FUNCIONARIO_LOGIN,
+                [SENHA] FUNCIONARIO_SENHA
             FROM
                 [TBFUNCIONARIO]
             WHERE 

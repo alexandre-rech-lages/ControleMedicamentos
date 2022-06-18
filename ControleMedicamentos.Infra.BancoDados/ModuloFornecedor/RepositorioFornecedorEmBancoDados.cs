@@ -42,23 +42,23 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
 
         protected override string sqlSelecionarTodos =>
             @"SELECT 
-                [ID],       
-                [NOME],
-                [TELEFONE],
-                [EMAIL],             
-                [CIDADE],                    
-                [ESTADO]
+                [ID] FORNECEDOR_ID,       
+                [NOME] FORNECEDOR_NOME,
+                [TELEFONE] FORNECEDOR_TELEFONE,
+                [EMAIL] FORNECEDOR_EMAIL,             
+                [CIDADE] FORNECEDOR_CIDADE,                    
+                [ESTADO] FORNECEDOR_ESTADO
             FROM
                 [TBFORNECEDOR]";
 
         protected override string sqlSelecionarPorId =>
             @"SELECT 
-                [ID],       
-                [NOME],
-                [TELEFONE],
-                [EMAIL],             
-                [CIDADE],                    
-                [ESTADO]
+               [ID] FORNECEDOR_ID,       
+                [NOME] FORNECEDOR_NOME,
+                [TELEFONE] FORNECEDOR_TELEFONE,
+                [EMAIL] FORNECEDOR_EMAIL,
+                [CIDADE] FORNECEDOR_CIDADE,
+                [ESTADO] FORNECEDOR_ESTADO
             FROM
                 [TBFORNECEDOR]
             WHERE 

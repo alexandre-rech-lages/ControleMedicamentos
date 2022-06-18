@@ -35,9 +35,9 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloPaciente
 
         protected override string sqlSelecionarPorId =>
             @"SELECT 
-		            [ID], 
-		            [NOME], 
-		            [CARTAOSUS]
+		            [ID] PACIENTE_ID, 
+		            [NOME] PACIENTE_NOME, 
+		            [CARTAOSUS] PACIENTE_CARTAOSUS
 	            FROM 
 		            [TBPACIENTE]
 		        WHERE
@@ -45,9 +45,9 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloPaciente
 
         protected override string sqlSelecionarTodos =>
             @"SELECT 
-		            [ID], 
-		            [NOME], 
-		            [CARTAOSUS]
+		            [ID] PACIENTE_ID, 
+		            [NOME] PACIENTE_NOME, 
+		            [CARTAOSUS] PACIENTE_CARTAOSUS
 	            FROM 
 		            [TBPACIENTE]";        
 

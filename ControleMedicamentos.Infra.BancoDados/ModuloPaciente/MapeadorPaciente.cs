@@ -14,11 +14,11 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloPaciente
             comando.Parameters.AddWithValue("CARTAOSUS", paciente.CartaoSUS);
         }
 
-        public override Paciente ConverterRegistro(SqlDataReader leitorPaciente)
+        public override Paciente ConverterRegistro(SqlDataReader leitorRegistro)
         {
-            int id = Convert.ToInt32(leitorPaciente["ID"]);
-            string nome = Convert.ToString(leitorPaciente["NOME"]);
-            string cartaoSus = Convert.ToString(leitorPaciente["CARTAOSUS"]);
+            int id = Convert.ToInt32(leitorRegistro["PACIENTE_ID"]);
+            string nome = Convert.ToString(leitorRegistro["PACIENTE_NOME"]);
+            string cartaoSus = Convert.ToString(leitorRegistro["PACIENTE_CARTAOSUS"]);
 
             return new Paciente()
             {
