@@ -1,11 +1,12 @@
 ﻿using ControleMedicamentos.Dominio.ModuloFuncionario;
 using ControleMedicamentos.Infra.BancoDados.ModuloFuncionario;
+using ControleMedicamentos.Infra.BancoDados.Tests.Compartilhado;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFuncionario
 {
     [TestClass]
-    public class RepositorioFuncionarioEmBancoDadosTest
+    public class RepositorioFuncionarioEmBancoDadosTest : BaseTest
     {
 
         private Funcionario funcionario;
@@ -13,8 +14,6 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFuncionario
 
         public RepositorioFuncionarioEmBancoDadosTest()
         {
-            Db.ExecutarSql("DELETE FROM TBFUNCIONARIO; DBCC CHECKIDENT (TBFUNCIONARIO, RESEED, 0)");
-
             funcionario = new Funcionario();
             funcionario.Nome = "Alberto Roberto";
             funcionario.Login = "albertoroberto";

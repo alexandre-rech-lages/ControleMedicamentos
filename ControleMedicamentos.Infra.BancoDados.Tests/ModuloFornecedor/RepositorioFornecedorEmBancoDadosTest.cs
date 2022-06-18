@@ -1,19 +1,18 @@
 ﻿using ControleMedicamentos.Dominio.ModuloFornecedor;
 using ControleMedicamentos.Infra.BancoDados.ModuloFornecedor;
+using ControleMedicamentos.Infra.BancoDados.Tests.Compartilhado;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFornecedor
 {
     [TestClass]
-    public class RepositorioFornecedorEmBancoDadosTest
+    public class RepositorioFornecedorEmBancoDadosTest : BaseTest
     {
         private Fornecedor fornecedor;
         private RepositorioFornecedorEmBancoDados repositorio;
 
         public RepositorioFornecedorEmBancoDadosTest()
         {
-            Db.ExecutarSql("DELETE FROM TBFORNECEDOR; DBCC CHECKIDENT (TBFORNECEDOR, RESEED, 0)");
-
             fornecedor = new Fornecedor();
             fornecedor.Nome = "Grupo Dimed";
             fornecedor.Email = "contato@grupodimed.com.br";

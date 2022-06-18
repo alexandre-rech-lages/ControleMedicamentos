@@ -60,7 +60,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
                 FORNECEDOR.[CIDADE] FORNECEDOR_CIDADE,
                 FORNECEDOR.[ESTADO] FORNECEDOR_ESTADO
             FROM
-                [TBMEDICAMENTO] AS MEDICAMENTO LEFT JOIN 
+                [TBMEDICAMENTO] AS MEDICAMENTO INNER JOIN 
                 [TBFORNECEDOR] AS FORNECEDOR
             ON
                 FORNECEDOR.ID = MEDICAMENTO.FORNECEDOR_ID";
@@ -82,7 +82,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
                 FORNECEDOR.[ESTADO] FORNECEDOR_ESTADO
 
             FROM
-                [TBMEDICAMENTO] AS MEDICAMENTO LEFT JOIN 
+                [TBMEDICAMENTO] AS MEDICAMENTO INNER JOIN 
                 [TBFORNECEDOR] AS FORNECEDOR
             ON
                 FORNECEDOR.ID = MEDICAMENTO.FORNECEDOR_ID
