@@ -2,80 +2,79 @@
 using ControleMedicamentos.Infra.BancoDados.ModuloFornecedor;
 using ControleMedicamentos.Infra.BancoDados.Tests.Compartilhado;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
 
 namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFornecedor
 {
     [TestClass]
-    public class RepositorioFornecedorEmBancoDadosTest : BaseTest
+    public class RepositorioFornecedorEmBancoDadosTest : IntegrationTestBase
     {
-        private Fornecedor fornecedor;
         private RepositorioFornecedorEmBancoDados repositorio;
 
         public RepositorioFornecedorEmBancoDadosTest()
-        {
-            fornecedor = new Fornecedor();
-            fornecedor.Nome = "Grupo Dimed";
-            fornecedor.Email = "contato@grupodimed.com.br";
-            fornecedor.Telefone = "49999292107";
-            fornecedor.Cidade = "Curitiba";
-            fornecedor.Estado = "PR";
-
+        {            
             repositorio = new RepositorioFornecedorEmBancoDados();
         }
 
         [TestMethod]
         public void Deve_inserir_novo_fornecedor()
         {
+            //arrange
+            var fornecedor = NovoFornecedor();
+
             //action
             repositorio.Inserir(fornecedor);
 
             //assert
             var fornecedorEncontrado = repositorio.SelecionarPorId(fornecedor.Id);
 
-            Assert.IsNotNull(fornecedorEncontrado);
-            Assert.AreEqual(fornecedor, fornecedorEncontrado);
+            fornecedorEncontrado.Should().NotBeNull();
+            fornecedorEncontrado.Should().Be(fornecedor);
         }
-
+       
         [TestMethod]
         public void Deve_editar_informacoes_fornecedor()
         {
-            //arrange                      
+            //arrange
+            var fornecedor = NovoFornecedor();
             repositorio.Inserir(fornecedor);
 
-            //action
             fornecedor.Nome = "Hera Medicamentos";
             fornecedor.Telefone = "49999292107";
             fornecedor.Email = "contato@heramedicamentos.com";
             fornecedor.Cidade = "Florianopolis";
             fornecedor.Estado = "SC";
 
+            //action
             repositorio.Editar(fornecedor);
 
             //assert
             var fornecedorEncontrado = repositorio.SelecionarPorId(fornecedor.Id);
 
-            Assert.IsNotNull(fornecedorEncontrado);
-            Assert.AreEqual(fornecedor, fornecedorEncontrado);
+            fornecedorEncontrado.Should().NotBeNull();
+            fornecedorEncontrado.Should().Be(fornecedor);
         }
 
         [TestMethod]
         public void Deve_excluir_fornecedor()
         {
             //arrange           
+            var fornecedor = NovoFornecedor();
             repositorio.Inserir(fornecedor);
 
             //action           
             repositorio.Excluir(fornecedor);
 
             //assert
-            var fornecedorEncontrado = repositorio.SelecionarPorId(fornecedor.Id);
-            Assert.IsNull(fornecedorEncontrado);
+            repositorio.SelecionarPorId(fornecedor.Id)
+                .Should().BeNull();
         }
 
         [TestMethod]
         public void Deve_selecionar_apenas_um_fornecedor()
         {
             //arrange          
+            var fornecedor = NovoFornecedor();
             repositorio.Inserir(fornecedor);
 
             //action
@@ -109,6 +108,12 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFornecedor
             Assert.AreEqual(f0.Nome, fornecedores[0].Nome);
             Assert.AreEqual(f1.Nome, fornecedores[1].Nome);
             Assert.AreEqual(f2.Nome, fornecedores[2].Nome);
+        }
+
+
+        private Fornecedor NovoFornecedor()
+        {
+            return new Fornecedor("Grupo Dimed", "49998165491", "contato@grupodimed.com.br", "Curitiba", "PR");
         }
     }
 }

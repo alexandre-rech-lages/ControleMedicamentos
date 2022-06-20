@@ -28,8 +28,11 @@ namespace ControleMedicamentos.Dominio.ModuloMedicamento
         public string Lote { get; set; }
         public DateTime Validade { get; set; }
         public int QuantidadeDisponivel { get; set; }
+
         public List<Requisicao> Requisicoes { get; set; }
+
         public Fornecedor Fornecedor { get; set; }
+
         public int QuantidadeRequisicoes { get { return Requisicoes.Count; } }
 
         public override bool Equals(object obj)

@@ -6,27 +6,22 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFuncionario
 {
     [TestClass]
-    public class RepositorioFuncionarioEmBancoDadosTest : BaseTest
+    public class RepositorioFuncionarioEmBancoDadosTest : IntegrationTestBase
     {
 
         private Funcionario funcionario;
         private RepositorioFuncionarioEmBancoDados repositorio;
 
         public RepositorioFuncionarioEmBancoDadosTest()
-        {
-            funcionario = new Funcionario();
-            funcionario.Nome = "Alberto Roberto";
-            funcionario.Login = "albertoroberto";
-            funcionario.Senha = "P@ssw0rd";
-
+        {            
             repositorio = new RepositorioFuncionarioEmBancoDados();
         }
-
 
         [TestMethod]
         public void Deve_inserir_novo_funcionario()
         {
             //action
+            funcionario = new Funcionario("Alberto Roberto", "albertoroberto", "P@ssw0rd");
             repositorio.Inserir(funcionario);
 
             //assert
@@ -39,7 +34,8 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFuncionario
         [TestMethod]
         public void Deve_editar_informacoes_funcionario()
         {
-            //arrange                      
+            //arrange
+            funcionario = new Funcionario("Alberto Roberto", "albertoroberto", "P@ssw0rd");
             repositorio.Inserir(funcionario);
 
             //action
@@ -60,6 +56,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFuncionario
         public void Deve_excluir_funcionario()
         {
             //arrange           
+            funcionario = new Funcionario("Alberto Roberto", "albertoroberto", "P@ssw0rd");
             repositorio.Inserir(funcionario);
 
             //action           
@@ -74,6 +71,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFuncionario
         public void Deve_selecionar_apenas_um_funcionario()
         {
             //arrange          
+            funcionario = new Funcionario("Alberto Roberto", "albertoroberto", "P@ssw0rd");
             repositorio.Inserir(funcionario);
 
             //action
@@ -92,7 +90,6 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFuncionario
             var funcionario2 = new Funcionario("Camila da Silva", "camila.silva", "P@ssw0rd");
             var funcionario3 = new Funcionario("Joana de Souza", "joana.souza", "P@ssw0rd");
 
-            var repositorio = new RepositorioFuncionarioEmBancoDados();
             repositorio.Inserir(funcionario1);
             repositorio.Inserir(funcionario2);
             repositorio.Inserir(funcionario3);

@@ -1,8 +1,10 @@
-﻿namespace ControleMedicamentos.Infra.BancoDados.Tests.Compartilhado
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace ControleMedicamentos.Infra.BancoDados.Tests.Compartilhado
 {
-    public class BaseTest
+    public class IntegrationTestBase
     {
-        public BaseTest()
+        public IntegrationTestBase()
         {
             Db.ExecutarSql("DELETE FROM TBREQUISICAO; DBCC CHECKIDENT (TBREQUISICAO, RESEED, 0)");
 
@@ -14,5 +16,7 @@
 
             Db.ExecutarSql("DELETE FROM TBFUNCIONARIO; DBCC CHECKIDENT (TBFUNCIONARIO, RESEED, 0)");
         }
+
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ControleMedicamentos.Dominio.ModuloPaciente;
 using ControleMedicamentos.Dominio.Tests.Compartilhado;
+using FluentValidation.Results;
 using FluentValidation.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -19,7 +20,7 @@ namespace ControleMedicamentos.Dominio.Tests.ModuloPaciente
                 CartaoSUS = "123456789123456"
             };
 
-            validador = new();
+            validador = new ValidadorPaciente();
         }
 
         [TestMethod]
@@ -29,23 +30,23 @@ namespace ControleMedicamentos.Dominio.Tests.ModuloPaciente
             paciente.Nome = null;
 
             // action
-            var resultado = validador.TestValidate(paciente);
+            var result = validador.TestValidate(paciente);
 
             // assert
-            resultado.ShouldHaveValidationErrorFor(p => p.Nome);
+            result.ShouldHaveValidationErrorFor(paciente => paciente.Nome);            
         }
 
         [TestMethod]
         public void Nome_Deve_Ser_Valido()
         {
             // arrange
-            paciente.Nome = "asass123345";
+            paciente.Nome = "Alan@-0g--gkdglsdgpo2";
 
             // action
             var resultado = validador.TestValidate(paciente);
 
             // assert
-            resultado.ShouldHaveValidationErrorFor(p => p.Nome);
+            resultado.ShouldHaveValidationErrorFor(paciente => paciente.Nome);
         }
 
         [TestMethod]
@@ -58,7 +59,7 @@ namespace ControleMedicamentos.Dominio.Tests.ModuloPaciente
             var resultado = validador.TestValidate(paciente);
 
             // assert
-            resultado.ShouldHaveValidationErrorFor(p => p.CartaoSUS);
+            resultado.ShouldHaveValidationErrorFor(paciente => paciente.CartaoSUS);
         }
 
         [TestMethod]
@@ -71,7 +72,7 @@ namespace ControleMedicamentos.Dominio.Tests.ModuloPaciente
             var resultado = validador.TestValidate(paciente);
 
             // assert
-            resultado.ShouldHaveValidationErrorFor(p => p.CartaoSUS);
+            resultado.ShouldHaveValidationErrorFor(paciente => paciente.CartaoSUS);
         }
 
     }

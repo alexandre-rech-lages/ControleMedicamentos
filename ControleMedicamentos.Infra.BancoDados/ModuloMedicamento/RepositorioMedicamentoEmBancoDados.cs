@@ -1,5 +1,6 @@
 ﻿using ControleMedicamentos.Dominio.ModuloMedicamento;
 using ControleMedicamentos.Infra.BancoDados.Compartilhado;
+using ControleMedicamentos.Infra.BancoDados.ModuloFornecedor;
 using ControleMedicamentos.Infra.BancoDados.ModuloMedicamento;
 using ControleMedicamentos.Infra.BancoDados.ModuloRequisicao;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
         RepositorioBase<Medicamento, ValidadorMedicamento, MapeadorMedicamento>,
         IRepositorioMedicamento
     {
+        private RepositorioFornecedorEmBancoDados repositorioFornecedor;
+
         protected override string sqlInserir =>
             @"INSERT INTO [TBMEDICAMENTO]
             (
@@ -64,10 +67,10 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
                 FORNECEDOR.[CIDADE] FORNECEDOR_CIDADE,
                 FORNECEDOR.[ESTADO] FORNECEDOR_ESTADO
             FROM
-                [TBMEDICAMENTO] AS MEDICAMENTO INNER JOIN 
-                [TBFORNECEDOR] AS FORNECEDOR
-            ON
-                FORNECEDOR.ID = MEDICAMENTO.FORNECEDOR_ID";
+                [TBMEDICAMENTO] AS MEDICAMENTO 
+
+            INNER JOIN [TBFORNECEDOR] AS FORNECEDOR
+                ON FORNECEDOR.ID = MEDICAMENTO.FORNECEDOR_ID";
 
         protected override string sqlSelecionarPorId =>
             @"SELECT 

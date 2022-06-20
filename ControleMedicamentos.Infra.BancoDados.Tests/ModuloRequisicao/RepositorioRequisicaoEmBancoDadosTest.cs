@@ -15,9 +15,8 @@ using System;
 namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
 {
     [TestClass]
-    public class RepositorioRequisicaoEmBancoDadosTest : BaseTest
+    public class RepositorioRequisicaoEmBancoDadosTest : IntegrationTestBase
     {
-        private Requisicao requisicao;
         private Medicamento medicamento;
         private Fornecedor fornecedor;
         private Funcionario funcionario;
@@ -31,92 +30,48 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
 
         public RepositorioRequisicaoEmBancoDadosTest()
         {
-            medicamento = gerarMedicamento();
-            fornecedor = gerarFornecedor();
-            paciente = gerarPaciente();
-            funcionario = gerarFuncionario();
-            requisicao = gerarRequisicao();
-
-            medicamento.Fornecedor = fornecedor;
-            requisicao.Medicamento = medicamento;
-            requisicao.Funcionario = funcionario;
-            requisicao.Paciente = paciente;
-
             repositorioMedicamento = new RepositorioMedicamentoEmBancoDados();
             repositorioFornecedor = new RepositorioFornecedorEmBancoDados();
             repositorioFuncionario = new RepositorioFuncionarioEmBancoDados();
             repositorioPaciente = new RepositorioPacienteEmBancoDados();
             repositorioRequisicao = new RepositorioRequisicaoEmBancoDados();
+
+            funcionario = new Funcionario();
+            funcionario.Nome = "Carlos Alberto";
+            funcionario.Login = "username.954";
+            funcionario.Senha = "P@ssw0rd";
+            repositorioFuncionario.Inserir(funcionario);
+
+            paciente = new Paciente();
+            paciente.Nome = "Alexandre Rech";
+            paciente.CartaoSUS = "123456789123456";
+            repositorioPaciente.Inserir(paciente);
+
+            fornecedor = new Fornecedor();
+            fornecedor.Nome = "Grupo Dimed";
+            fornecedor.Email = "contato@grupodimed.com.br";
+            fornecedor.Telefone = "49999292107";
+            fornecedor.Cidade = "Curitiba";
+            fornecedor.Estado = "PR";
+            repositorioFornecedor.Inserir(fornecedor);
+
+            medicamento = new Medicamento();
+            medicamento.Nome = "Paracetamol";
+            medicamento.Descricao = "Analgésico";
+            medicamento.Lote = "P-001";
+            medicamento.Validade = new DateTime(2022, 8, 20);
+            medicamento.QuantidadeDisponivel = 50;
+            medicamento.Fornecedor = fornecedor;
+            repositorioMedicamento.Inserir(medicamento);                       
         }
-
-        public Requisicao gerarRequisicao()
-        {
-            Requisicao requisicao = new Requisicao();
-            requisicao.Data = new DateTime(2022, 01, 09, 09, 15, 00);
-            requisicao.QuantidadeMedicamento = 2;
-
-            return requisicao;
-        }
-
-        public Medicamento gerarMedicamento()
-        {
-            Medicamento medicamento = new()
-            {
-                Nome = "Paracetamol",
-                Descricao = "Analgésico",
-                Lote = "P-001",
-                Validade = new DateTime(2022, 8, 20),
-                QuantidadeDisponivel = 50,
-            };
-
-            return medicamento;
-        }
-
-        public Fornecedor gerarFornecedor()
-        {
-            fornecedor = new()
-            {
-                Nome = "Rech",
-                Telefone = "49998165491",
-                Email = "Rech@email.com",
-                Cidade = "Lages",
-                Estado = "SC"
-            };
-
-            return fornecedor;
-        }
-
-        public Paciente gerarPaciente()
-        {
-            Paciente paciente = new()
-            {
-                Nome = "Rech",
-                CartaoSUS = "123456789123456"
-            };
-
-            return paciente;
-        }
-
-        public Funcionario gerarFuncionario()
-        {
-            Funcionario funcionario = new()
-            {
-                Nome = "Rech",
-                Login = "username.954",
-                Senha = "Password"
-            };
-
-            return funcionario;
-        }
-
+    
         [TestMethod]
         public void Deve_inserir_nova_requisicao()
         {
-            //action
-            repositorioFornecedor.Inserir(fornecedor);
-            repositorioMedicamento.Inserir(medicamento);
-            repositorioFuncionario.Inserir(funcionario);
-            repositorioPaciente.Inserir(paciente);
+            //arrange
+            Requisicao requisicao = new Requisicao(medicamento, paciente, 2, new DateTime(2022, 01, 09, 09, 15, 00), funcionario);
+
+            //action                                                                        
             repositorioRequisicao.Inserir(requisicao);
 
             //assert
@@ -130,14 +85,11 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
         public void Deve_editar_informacoes_requisicao()
         {
             //arrange                      
-            repositorioFornecedor.Inserir(fornecedor);
-            repositorioMedicamento.Inserir(medicamento);
-            repositorioFuncionario.Inserir(funcionario);
-            repositorioPaciente.Inserir(paciente);
+            Requisicao requisicao = new Requisicao(medicamento,paciente,2, new DateTime(2022, 01, 09, 09, 15, 00),funcionario);
+            requisicao.QuantidadeMedicamento = 5;
             repositorioRequisicao.Inserir(requisicao);
 
             //action
-            requisicao.QuantidadeMedicamento = 5;
             repositorioRequisicao.Editar(requisicao);
 
             //assert
@@ -151,10 +103,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
         public void Deve_excluir_requisicao()
         {
             //arrange           
-            repositorioFornecedor.Inserir(fornecedor);
-            repositorioMedicamento.Inserir(medicamento);
-            repositorioFuncionario.Inserir(funcionario);
-            repositorioPaciente.Inserir(paciente);
+            Requisicao requisicao = new Requisicao(medicamento, paciente, 2, new DateTime(2022, 01, 09, 09, 15, 00), funcionario);
             repositorioRequisicao.Inserir(requisicao);
 
             //action           
@@ -169,10 +118,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
         public void Deve_selecionar_apenas_uma_requisicao()
         {
             //arrange          
-            repositorioFornecedor.Inserir(fornecedor);
-            repositorioMedicamento.Inserir(medicamento);
-            repositorioFuncionario.Inserir(funcionario);
-            repositorioPaciente.Inserir(paciente);
+            Requisicao requisicao = new Requisicao(medicamento, paciente, 2, new DateTime(2022, 01, 09, 09, 15, 00), funcionario);
             repositorioRequisicao.Inserir(requisicao);
 
             //action
@@ -186,11 +132,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
         [TestMethod]
         public void Deve_selecionar_todos_as_requisicoes()
         {
-            //arrange
-            repositorioFornecedor.Inserir(fornecedor);
-            repositorioMedicamento.Inserir(medicamento);
-            repositorioFuncionario.Inserir(funcionario);
-            repositorioPaciente.Inserir(paciente);
+            //arrange          
             var requisicao1 = new Requisicao(medicamento, paciente, 3, new DateTime(2022, 01, 09, 09, 15, 00), funcionario);
             var requisicao2 = new Requisicao(medicamento, paciente, 7, new DateTime(2022, 03, 09, 09, 15, 00), funcionario);
 

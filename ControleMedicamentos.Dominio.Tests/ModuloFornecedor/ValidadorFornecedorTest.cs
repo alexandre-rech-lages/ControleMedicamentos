@@ -15,14 +15,14 @@ namespace ControleMedicamentos.Dominio.Tests.ModuloFornecedor
         {
             fornecedor = new()
             {
-                Nome = "Rech",
+                Nome = "Alexandre Rech",
                 Telefone = "49998165491",
                 Email = "Rech@email.com",
                 Cidade = "Lages",
                 Estado = "SC"
             };
 
-            validador = new();
+            validador = new ValidadorFornecedor();
         }
 
         [TestMethod]

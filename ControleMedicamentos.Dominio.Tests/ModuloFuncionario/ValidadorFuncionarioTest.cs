@@ -15,12 +15,12 @@ namespace ControleMedicamentos.Dominio.Tests.ModuloFuncionario
         {
             funcionario = new()
             {
-                Nome = "Rech",
+                Nome = "Alexandre Rech",
                 Login = "username.954",
                 Senha = "459@password!username"
             };
 
-            validador = new();
+            validador = new ValidadorFuncionario();
         }
 
         [TestMethod]

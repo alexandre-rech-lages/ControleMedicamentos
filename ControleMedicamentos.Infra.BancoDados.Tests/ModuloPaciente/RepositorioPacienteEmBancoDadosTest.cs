@@ -6,20 +6,22 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
 {
     [TestClass]
-    public class RepositorioPacienteEmBancoDadosTest : BaseTest
+    public class RepositorioPacienteEmBancoDadosTest : IntegrationTestBase
     {
         private Paciente paciente;
         private RepositorioPacienteEmBancoDados repositorio;
 
         public RepositorioPacienteEmBancoDadosTest()
-        {
-            paciente = new Paciente("José da Silva", "321654987");
+        {            
             repositorio = new RepositorioPacienteEmBancoDados();
         }
 
         [TestMethod]
         public void Deve_inserir_novo_paciente()
         {
+            //arrange
+            paciente = new Paciente("José da Silva", "321654987");
+
             //action
             repositorio.Inserir(paciente);
 
@@ -32,8 +34,9 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
 
         [TestMethod]
         public void Deve_editar_informacoes_paciente()
-        {
-            //arrange                      
+        {                                 
+            //arrange
+            paciente = new Paciente("José da Silva", "321654987");
             repositorio.Inserir(paciente);
 
             //action
@@ -52,6 +55,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
         public void Deve_excluir_paciente()
         {
             //arrange           
+            paciente = new Paciente("José da Silva", "321654987");
             repositorio.Inserir(paciente);
 
             //action           
@@ -65,7 +69,8 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
         [TestMethod]
         public void Deve_selecionar_apenas_um_paciente()
         {
-            //arrange          
+            //arrange
+            paciente = new Paciente("José da Silva", "321654987");
             repositorio.Inserir(paciente);
 
             //action
@@ -94,9 +99,9 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
             //assert
             Assert.AreEqual(3, pacientes.Count);
 
-            Assert.AreEqual(p01.Nome, pacientes[0].Nome);
-            Assert.AreEqual(p02.Nome, pacientes[1].Nome);
-            Assert.AreEqual(p03.Nome, pacientes[2].Nome);
+            Assert.AreEqual(p01, pacientes[0]);
+            Assert.AreEqual(p02, pacientes[1]);
+            Assert.AreEqual(p03, pacientes[2]);
         }
     }
 }

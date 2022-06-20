@@ -17,7 +17,7 @@ namespace ControleMedicamentos.Dominio.Tests.ModuloMedicamento
         {
             fornecedor = new()
             {
-                Nome = "Rech",
+                Nome = "Alexandre Rech",
                 Telefone = "49998165491",
                 Email = "Rech@email.com",
                 Cidade = "Lages",
@@ -34,7 +34,7 @@ namespace ControleMedicamentos.Dominio.Tests.ModuloMedicamento
                 Fornecedor = fornecedor
             };
 
-            validador = new();
+            validador = new ValidadorMedicamento();
         }
 
         [TestMethod]

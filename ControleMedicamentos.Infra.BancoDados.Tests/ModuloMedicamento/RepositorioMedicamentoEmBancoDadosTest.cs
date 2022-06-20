@@ -16,66 +16,36 @@ namespace ControleMedicamento.Infra.BancoDados.Tests.ModuloMedicamento
 {
 
     [TestClass]
-    public class RepositorioMedicamentoEmBancoDeDadosTest : BaseTest
+    public class RepositorioMedicamentoEmBancoDeDadosTest : IntegrationTestBase
     {
         private Fornecedor fornecedor;
-        private Medicamento medicamento;
         private Paciente paciente;
         private Funcionario funcionario;
 
-        private RepositorioRequisicaoEmBancoDados repositorioRequisicao;
         private RepositorioMedicamentoEmBancoDados repositorioMedicamento;
         private RepositorioFornecedorEmBancoDados repositorioFornecedor;
-        private RepositorioFuncionarioEmBancoDados repositorioFuncionario;
-        private RepositorioPacienteEmBancoDados repositorioPaciente;
-
         public RepositorioMedicamentoEmBancoDeDadosTest()
         {
-            funcionario = new()
-            {
-                Nome = "Rech",
-                Login = "username.954",
-                Senha = "P@ssw0rd"
-            };
-
-            paciente = new Paciente();
-            paciente.Nome = "Rech";
-            paciente.CartaoSUS = "123456789123456";
-
-            medicamento = new()
-            {
-                Nome = "Paracetamol",
-                Descricao = "Analgésico",
-                Lote = "P-001",
-                Validade = new DateTime(2022, 8, 20),
-                QuantidadeDisponivel = 50,
-                Fornecedor = fornecedor
-            };
-
-            fornecedor = new()
-            {
-                Nome = "Rech",
-                Telefone = "49998165491",
-                Email = "Rech@email.com",
-                Cidade = "Lages",
-                Estado = "SC"
-            };
-
-            medicamento.Fornecedor = fornecedor;
-
             repositorioMedicamento = new RepositorioMedicamentoEmBancoDados();
-            repositorioFornecedor = new RepositorioFornecedorEmBancoDados();
-            repositorioFuncionario = new RepositorioFuncionarioEmBancoDados();
-            repositorioPaciente = new RepositorioPacienteEmBancoDados();
-            repositorioRequisicao = new RepositorioRequisicaoEmBancoDados();
+            repositorioFornecedor = new RepositorioFornecedorEmBancoDados();           
+
+            fornecedor = new Fornecedor();
+            fornecedor.Nome = "Grupo Dimed";
+            fornecedor.Email = "contato@grupodimed.com.br";
+            fornecedor.Telefone = "49999292107";
+            fornecedor.Cidade = "Curitiba";
+            fornecedor.Estado = "PR";
+            repositorioFornecedor.Inserir(fornecedor);
         }
 
 
         [TestMethod]
         public void Deve_inserir_novo_medicamento()
         {
-            //action
-            repositorioFornecedor.Inserir(fornecedor);
+            //arrange
+            var medicamento = new Medicamento("Paracetamol", "Analgésico", "P-001", new DateTime(2022, 8, 20), 50, fornecedor);
+
+            //action            
             repositorioMedicamento.Inserir(medicamento);
 
             //assert
@@ -88,8 +58,8 @@ namespace ControleMedicamento.Infra.BancoDados.Tests.ModuloMedicamento
         [TestMethod]
         public void Deve_editar_informacoes_medicamento()
         {
-            //arrange                      
-            repositorioFornecedor.Inserir(fornecedor);
+            //arrange
+            var medicamento = new Medicamento("Paracetamol", "Analgésico", "P-001", new DateTime(2022, 8, 20), 50, fornecedor);
             repositorioMedicamento.Inserir(medicamento);
 
             //action
@@ -107,8 +77,8 @@ namespace ControleMedicamento.Infra.BancoDados.Tests.ModuloMedicamento
         [TestMethod]
         public void Deve_excluir_medicamento()
         {
-            //arrange           
-            repositorioFornecedor.Inserir(fornecedor);
+            //arrange
+            var medicamento = new Medicamento("Paracetamol", "Analgésico", "P-001", new DateTime(2022, 8, 20), 50, fornecedor);
             repositorioMedicamento.Inserir(medicamento);
 
             //action           
@@ -122,8 +92,8 @@ namespace ControleMedicamento.Infra.BancoDados.Tests.ModuloMedicamento
         [TestMethod]
         public void Deve_selecionar_apenas_um_medicamento()
         {
-            //arrange          
-            repositorioFornecedor.Inserir(fornecedor);
+            //arrange
+            var medicamento = new Medicamento("Paracetamol", "Analgésico", "P-001", new DateTime(2022, 8, 20), 50, fornecedor);
             repositorioMedicamento.Inserir(medicamento);
 
             //action
@@ -138,30 +108,14 @@ namespace ControleMedicamento.Infra.BancoDados.Tests.ModuloMedicamento
         public void Deve_selecionar_todos_os_medicamentos()
         {
             //arrange
-            Fornecedor fornecedor2 = new()
-            {
-                Nome = "James",
-                Telefone = "11984675506",
-                Email = "james@email.com",
-                Cidade = "Guarulhos",
-                Estado = "SP"
-            };
-
-            Medicamento medicamento2 = new()
-            {
-                Nome = "Nimesulida",
-                Descricao = "Anti-Inflamatório",
-                Lote = "N-001",
-                Validade = new DateTime(2025, 5, 15),
-                QuantidadeDisponivel = 100,
-                Fornecedor = fornecedor
-            };
-
-            repositorioFornecedor.Inserir(fornecedor);
-            repositorioFornecedor.Inserir(fornecedor2);
-
+            var medicamento = new Medicamento("Paracetamol", "Analgésico", "P-001", new DateTime(2022, 8, 20), 50, fornecedor);
             repositorioMedicamento.Inserir(medicamento);
-            repositorioMedicamento.Inserir(medicamento2);
+
+            var outroFornecedor = new Fornecedor("Flavio Augusto", "11984675506", "Flavio@email.com", "Guarulhos", "SP");
+            repositorioFornecedor.Inserir(outroFornecedor);
+
+            var outroMedicamento = new Medicamento("Nimesulida", "Anti-Inflamatório", "N-001", new DateTime(2025, 5, 15), 100, outroFornecedor);            
+            repositorioMedicamento.Inserir(outroMedicamento);
 
             // action
             var medicamentosEncontrados = repositorioMedicamento.SelecionarTodos();
@@ -169,15 +123,28 @@ namespace ControleMedicamento.Infra.BancoDados.Tests.ModuloMedicamento
             // assert
             Assert.AreEqual(2, medicamentosEncontrados.Count);
 
-            Assert.AreEqual("Paracetamol", medicamentosEncontrados[0].Nome);
-            Assert.AreEqual("Nimesulida", medicamentosEncontrados[1].Nome);
-
+            Assert.AreEqual(medicamento, medicamentosEncontrados[0]);
+            Assert.AreEqual(outroMedicamento, medicamentosEncontrados[1]);
         }
 
         [TestMethod]
         public void Deve_selecionar_todos_os_medicamentos_com_requisicoes()
         {
             //arrange
+            var repositorioFuncionario = new RepositorioFuncionarioEmBancoDados();
+            var repositorioPaciente = new RepositorioPacienteEmBancoDados();
+            var repositorioRequisicao = new RepositorioRequisicaoEmBancoDados();
+
+            funcionario = new Funcionario();
+            funcionario.Nome = "Almir Sater";
+            funcionario.Login = "username.954";
+            funcionario.Senha = "P@ssw0rd";
+
+            paciente = new Paciente();
+            paciente.Nome = "Alexandre Rech";
+            paciente.CartaoSUS = "123456789123456";
+            repositorioFornecedor.Inserir(fornecedor);
+
             repositorioPaciente.Inserir(paciente);
 
             repositorioFuncionario.Inserir(funcionario);
