@@ -16,19 +16,19 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloRequisicao
             comando.Parameters.AddWithValue("FUNCIONARIO_ID", registro.Funcionario.Id);
             comando.Parameters.AddWithValue("PACIENTE_ID", registro.Paciente.Id);
             comando.Parameters.AddWithValue("MEDICAMENTO_ID", registro.Medicamento.Id);
-            comando.Parameters.AddWithValue("QUANTIDADEMEDICAMENTO", registro.QtdMedicamento);
+            comando.Parameters.AddWithValue("QUANTIDADEMEDICAMENTO", registro.QuantidadeMedicamento);
             comando.Parameters.AddWithValue("DATA", registro.Data);
         }
 
         public override Requisicao ConverterRegistro(SqlDataReader leitorRegistro)
         {
-            var id = Convert.ToInt32(leitorRegistro["REQUISICAO_ID"]);            
+            var id = Convert.ToInt32(leitorRegistro["REQUISICAO_ID"]);
             var quantidadeMedicamento = Convert.ToInt32(leitorRegistro["REQUISICAO_QUANTIDADEMEDICAMENTO"]);
             var data = Convert.ToDateTime(leitorRegistro["REQUISICAO_DATA"]);
 
             Requisicao requisicao = new Requisicao();
             requisicao.Id = id;
-            requisicao.QtdMedicamento = quantidadeMedicamento;
+            requisicao.QuantidadeMedicamento = quantidadeMedicamento;
             requisicao.Data = data;
 
             requisicao.Funcionario = new MapeadorFuncionario().ConverterRegistro(leitorRegistro);

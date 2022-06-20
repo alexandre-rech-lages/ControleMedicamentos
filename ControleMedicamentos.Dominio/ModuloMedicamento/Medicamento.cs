@@ -30,7 +30,7 @@ namespace ControleMedicamentos.Dominio.ModuloMedicamento
         public int QuantidadeDisponivel { get; set; }
         public List<Requisicao> Requisicoes { get; set; }
         public Fornecedor Fornecedor { get; set; }
-        public int QuantidadeRequisicoes { get { return Requisicoes.Count; } }       
+        public int QuantidadeRequisicoes { get { return Requisicoes.Count; } }
 
         public override bool Equals(object obj)
         {
@@ -58,6 +58,16 @@ namespace ControleMedicamentos.Dominio.ModuloMedicamento
             hash.Add(Fornecedor);
             hash.Add(QuantidadeRequisicoes);
             return hash.ToHashCode();
+        }
+
+        public void RegistrarRequisicao(Requisicao requisicao)
+        {
+            if (Requisicoes.Contains(requisicao))
+                return;
+
+            Requisicoes.Add(requisicao);
+
+            requisicao.Medicamento = this;
         }
     }
 }

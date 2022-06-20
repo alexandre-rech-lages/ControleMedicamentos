@@ -16,7 +16,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFornecedor
             fornecedor = new Fornecedor();
             fornecedor.Nome = "Grupo Dimed";
             fornecedor.Email = "contato@grupodimed.com.br";
-            fornecedor.Telefone = "99999999";
+            fornecedor.Telefone = "49999292107";
             fornecedor.Cidade = "Curitiba";
             fornecedor.Estado = "PR";
 
@@ -44,7 +44,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFornecedor
 
             //action
             fornecedor.Nome = "Hera Medicamentos";
-            fornecedor.Telefone = "222222222";
+            fornecedor.Telefone = "49999292107";
             fornecedor.Email = "contato@heramedicamentos.com";
             fornecedor.Cidade = "Florianopolis";
             fornecedor.Estado = "SC";
@@ -90,9 +90,9 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFornecedor
         public void Deve_selecionar_todos_os_fornecedores()
         {
             //arrange
-            var f0 = new Fornecedor("Althis", "333333333", "althis@gmail.com", "Lages", "SC");
-            var f1 = new Fornecedor("Althermed", "222222222", "altermed@gmail.com", "Lages", "SC");
-            var f2 = new Fornecedor("Riomed", "1111111111", "riomed@gmail.com", "Lages", "SC");
+            var f0 = new Fornecedor("Althis", "49999292101", "althis@gmail.com", "Lages", "SC");
+            var f1 = new Fornecedor("Althermed", "49999292102", "altermed@gmail.com", "Lages", "SC");
+            var f2 = new Fornecedor("Riomed", "49999292103", "riomed@gmail.com", "Lages", "SC");
 
             var repositorio = new RepositorioFornecedorEmBancoDados();
             repositorio.Inserir(f0);

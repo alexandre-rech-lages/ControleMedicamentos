@@ -16,14 +16,14 @@ namespace ControleMedicamentos.Dominio.ModuloRequisicao
         {
             Medicamento = medicamento;
             Paciente = paciente;
-            QtdMedicamento = qtdMedicamento;
+            QuantidadeMedicamento = qtdMedicamento;
             Data = data;
             Funcionario = funcionario;
         }
 
         public Medicamento Medicamento { get; set; }
         public Paciente Paciente { get; set; }
-        public int QtdMedicamento { get; set; }
+        public int QuantidadeMedicamento { get; set; }
         public DateTime Data { get; set; }
         public Funcionario Funcionario { get; set; }
 
@@ -33,14 +33,14 @@ namespace ControleMedicamentos.Dominio.ModuloRequisicao
                    Id == requisicao.Id &&
                    EqualityComparer<Medicamento>.Default.Equals(Medicamento, requisicao.Medicamento) &&
                    EqualityComparer<Paciente>.Default.Equals(Paciente, requisicao.Paciente) &&
-                   QtdMedicamento == requisicao.QtdMedicamento &&
+                   QuantidadeMedicamento == requisicao.QuantidadeMedicamento &&
                    Data == requisicao.Data &&
                    EqualityComparer<Funcionario>.Default.Equals(Funcionario, requisicao.Funcionario);
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Id, Medicamento, Paciente, QtdMedicamento, Data, Funcionario);
+            return HashCode.Combine(Id, Medicamento, Paciente, QuantidadeMedicamento, Data, Funcionario);
         }
     }
 }

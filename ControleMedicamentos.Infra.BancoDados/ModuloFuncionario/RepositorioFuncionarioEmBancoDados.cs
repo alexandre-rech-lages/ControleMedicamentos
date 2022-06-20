@@ -4,7 +4,8 @@ using ControleMedicamentos.Infra.BancoDados.Compartilhado;
 namespace ControleMedicamentos.Infra.BancoDados.ModuloFuncionario
 {
     public class RepositorioFuncionarioEmBancoDados :
-        RepositorioBase<Funcionario, ValidadorFuncionario, MapeadorFuncionario>
+        RepositorioBase<Funcionario, ValidadorFuncionario, MapeadorFuncionario>,
+        IRepositorioFuncionario
     {
         protected override string sqlInserir =>
             @"INSERT INTO [TBFUNCIONARIO]
@@ -19,19 +20,19 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFuncionario
                     @LOGIN,
                     @SENHA
                 ); SELECT SCOPE_IDENTITY();";
-        
+
         protected override string sqlEditar =>
             @" UPDATE [TBFUNCIONARIO]
                     SET 
                         [NOME] = @NOME, 
                         [LOGIN] = @LOGIN, 
                         [SENHA] = @SENHA
-                    WHERE [ID] = @ID";        
+                    WHERE [ID] = @ID";
 
         protected override string sqlExcluir =>
             @"DELETE FROM [TBFUNCIONARIO] 
                     WHERE [ID] = @ID";
-        
+
         protected override string sqlSelecionarTodos =>
             @"SELECT 
                 [ID] FUNCIONARIO_ID,       

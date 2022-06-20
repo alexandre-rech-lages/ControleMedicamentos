@@ -1,21 +1,21 @@
-﻿using ControleMedicamentos.Dominio.ModuloMedicamento;
+﻿using ControleMedicamento.Infra.BancoDados.ModuloMedicamento;
 using ControleMedicamentos.Dominio.ModuloFornecedor;
-using ControleMedicamentos.Dominio.ModuloPaciente;
 using ControleMedicamentos.Dominio.ModuloFuncionario;
+using ControleMedicamentos.Dominio.ModuloMedicamento;
+using ControleMedicamentos.Dominio.ModuloPaciente;
 using ControleMedicamentos.Dominio.ModuloRequisicao;
-using ControleMedicamentos.Infra.BancoDados.ModuloPaciente;
-using ControleMedicamentos.Infra.BancoDados.ModuloFuncionario;
 using ControleMedicamentos.Infra.BancoDados.ModuloFornecedor;
-using ControleMedicamento.Infra.BancoDados.ModuloMedicamento;
+using ControleMedicamentos.Infra.BancoDados.ModuloFuncionario;
+using ControleMedicamentos.Infra.BancoDados.ModuloPaciente;
 using ControleMedicamentos.Infra.BancoDados.ModuloRequisicao;
+using ControleMedicamentos.Infra.BancoDados.Tests.Compartilhado;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using ControleMedicamentos.Infra.BancoDados.Tests.Compartilhado;
 
 namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
 {
     [TestClass]
-    public class RepositorioPacienteEmBancoDadosTest : BaseTest
+    public class RepositorioRequisicaoEmBancoDadosTest : BaseTest
     {
         private Requisicao requisicao;
         private Medicamento medicamento;
@@ -23,14 +23,14 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
         private Funcionario funcionario;
         private Paciente paciente;
 
-        private RepositorioRequisicaoEmBancoDados repositorioRequisicao;        
-        private RepositorioMedicamentoEmBancoDados repositorioMedicamento;        
-        private RepositorioFornecedorEmBancoDados repositorioFornecedor;        
-        private RepositorioFuncionarioEmBancoDados repositorioFuncionario;        
+        private RepositorioRequisicaoEmBancoDados repositorioRequisicao;
+        private RepositorioMedicamentoEmBancoDados repositorioMedicamento;
+        private RepositorioFornecedorEmBancoDados repositorioFornecedor;
+        private RepositorioFuncionarioEmBancoDados repositorioFuncionario;
         private RepositorioPacienteEmBancoDados repositorioPaciente;
 
-        public RepositorioPacienteEmBancoDadosTest()
-        {            
+        public RepositorioRequisicaoEmBancoDadosTest()
+        {
             medicamento = gerarMedicamento();
             fornecedor = gerarFornecedor();
             paciente = gerarPaciente();
@@ -47,57 +47,64 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
             repositorioFuncionario = new RepositorioFuncionarioEmBancoDados();
             repositorioPaciente = new RepositorioPacienteEmBancoDados();
             repositorioRequisicao = new RepositorioRequisicaoEmBancoDados();
-
         }
 
         public Requisicao gerarRequisicao()
         {
             Requisicao requisicao = new Requisicao();
             requisicao.Data = new DateTime(2022, 01, 09, 09, 15, 00);
-            requisicao.QtdMedicamento = 2;
+            requisicao.QuantidadeMedicamento = 2;
 
             return requisicao;
         }
 
         public Medicamento gerarMedicamento()
         {
-            Medicamento medicamento = new Medicamento();
-            medicamento.Nome = "Doril";
-            medicamento.Descricao = "Tomou doril a dor sumiu.";
-            medicamento.Lote = "231AS1";
-            medicamento.Validade = new DateTime(2022, 01, 09, 09, 15, 00);
-            medicamento.QuantidadeDisponivel = 10;
+            Medicamento medicamento = new()
+            {
+                Nome = "Paracetamol",
+                Descricao = "Analgésico",
+                Lote = "P-001",
+                Validade = new DateTime(2022, 8, 20),
+                QuantidadeDisponivel = 50,
+            };
 
             return medicamento;
         }
 
         public Fornecedor gerarFornecedor()
         {
-            Fornecedor fornecedor = new Fornecedor();
-            fornecedor.Nome = "Rogerio";
-            fornecedor.Email = "RogerinDoYoutube@gmail.com";
-            fornecedor.Telefone = "4002-8922";
-            fornecedor.Cidade = "Lages";
-            fornecedor.Estado = "SC";
+            fornecedor = new()
+            {
+                Nome = "Rech",
+                Telefone = "49998165491",
+                Email = "Rech@email.com",
+                Cidade = "Lages",
+                Estado = "SC"
+            };
 
             return fornecedor;
         }
 
         public Paciente gerarPaciente()
         {
-            Paciente paciente = new Paciente();
-            paciente.Nome = "Luan";
-            paciente.CartaoSUS = "1322131231";
+            Paciente paciente = new()
+            {
+                Nome = "Rech",
+                CartaoSUS = "123456789123456"
+            };
 
             return paciente;
         }
 
         public Funcionario gerarFuncionario()
         {
-            Funcionario funcionario = new Funcionario();
-            funcionario.Login = "loginteste";
-            funcionario.Senha = "senhateste";
-            funcionario.Nome = "nometeste";
+            Funcionario funcionario = new()
+            {
+                Nome = "Rech",
+                Login = "username.954",
+                Senha = "Password"
+            };
 
             return funcionario;
         }
@@ -130,7 +137,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
             repositorioRequisicao.Inserir(requisicao);
 
             //action
-            requisicao.QtdMedicamento = 5;
+            requisicao.QuantidadeMedicamento = 5;
             repositorioRequisicao.Editar(requisicao);
 
             //assert

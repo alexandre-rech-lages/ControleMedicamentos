@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
 {
     public class MapeadorFornecedor : MapeadorBase<Fornecedor>
-    {       
+    {
         public override void ConfigurarParametros(Fornecedor registro, SqlCommand comando)
         {
             comando.Parameters.AddWithValue("ID", registro.Id);
@@ -18,7 +18,10 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
         }
 
         public override Fornecedor ConverterRegistro(SqlDataReader leitorRegistro)
-        {            
+        {
+            if (leitorRegistro["FORNECEDOR_ID"] == DBNull.Value)
+                return null;
+
             var id = Convert.ToInt32(leitorRegistro["FORNECEDOR_ID"]);
             var nome = Convert.ToString(leitorRegistro["FORNECEDOR_NOME"]);
             var telefone = Convert.ToString(leitorRegistro["FORNECEDOR_TELEFONE"]);

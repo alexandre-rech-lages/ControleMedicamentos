@@ -8,9 +8,9 @@ using System.Data.SqlClient;
 namespace ControleMedicamentos.Infra.BancoDados.Compartilhado
 {
     public abstract class RepositorioBase<T, TValidador, TMapeador>
-        where T : EntidadeBase<T>
-        where TValidador : AbstractValidator<T>, new()
-        where TMapeador : MapeadorBase<T>, new()
+            where T : EntidadeBase<T>
+            where TValidador : AbstractValidator<T>, new()
+            where TMapeador : MapeadorBase<T>, new()
     {
         protected string enderecoBanco =
             @"Data Source=(LOCALDB)\MSSQLLOCALDB;

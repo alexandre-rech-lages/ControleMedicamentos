@@ -1,15 +1,11 @@
 ﻿using ControleMedicamentos.Dominio.ModuloRequisicao;
 using ControleMedicamentos.Infra.BancoDados.Compartilhado;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ControleMedicamentos.Infra.BancoDados.ModuloRequisicao
 {
     public class RepositorioRequisicaoEmBancoDados :
-        RepositorioBase<Requisicao, ValidadorRequisicao, MapeadorRequisicao>
+        RepositorioBase<Requisicao, ValidadorRequisicao, MapeadorRequisicao>,
+        IRepositorioRequisicao
     {
 
         protected override string sqlInserir =>

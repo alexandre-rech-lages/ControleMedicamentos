@@ -4,7 +4,8 @@ using ControleMedicamentos.Infra.BancoDados.Compartilhado;
 namespace ControleMedicamentos.Infra.BancoDados.ModuloPaciente
 {
     public class RepositorioPacienteEmBancoDados :
-        RepositorioBase<Paciente, ValidadorPaciente, MapeadorPaciente>
+        RepositorioBase<Paciente, ValidadorPaciente, MapeadorPaciente>,
+        IRepositorioPaciente
     {
         protected override string sqlInserir =>
             @"INSERT INTO [TBPACIENTE] 
@@ -17,7 +18,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloPaciente
                     @NOME,
                     @CARTAOSUS
 
-                );SELECT SCOPE_IDENTITY();";        
+                );SELECT SCOPE_IDENTITY();";
 
         protected override string sqlEditar =>
             @"UPDATE [TBPACIENTE]	
@@ -26,12 +27,12 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloPaciente
 			        [CARTAOSUS] = @CARTAOSUS
 
 		        WHERE
-			        [ID] = @ID";        
+			        [ID] = @ID";
 
-        protected override string sqlExcluir => 
+        protected override string sqlExcluir =>
             @"DELETE FROM [TBPACIENTE]			        
 		        WHERE
-			        [ID] = @ID";        
+			        [ID] = @ID";
 
         protected override string sqlSelecionarPorId =>
             @"SELECT 
@@ -41,7 +42,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloPaciente
 	            FROM 
 		            [TBPACIENTE]
 		        WHERE
-                    [ID] = @ID";        
+                    [ID] = @ID";
 
         protected override string sqlSelecionarTodos =>
             @"SELECT 
@@ -49,7 +50,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloPaciente
 		            [NOME] PACIENTE_NOME, 
 		            [CARTAOSUS] PACIENTE_CARTAOSUS
 	            FROM 
-		            [TBPACIENTE]";        
+		            [TBPACIENTE]";
 
     }
 }

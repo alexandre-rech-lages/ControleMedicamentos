@@ -12,7 +12,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
         private RepositorioPacienteEmBancoDados repositorio;
 
         public RepositorioPacienteEmBancoDadosTest()
-        {            
+        {
             paciente = new Paciente("José da Silva", "321654987");
             repositorio = new RepositorioPacienteEmBancoDados();
         }

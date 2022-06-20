@@ -1,9 +1,5 @@
 ﻿using FluentValidation;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ControleMedicamentos.Dominio.ModuloRequisicao
 {
@@ -11,17 +7,27 @@ namespace ControleMedicamentos.Dominio.ModuloRequisicao
     {
         public ValidadorRequisicao()
         {
-            When(x => x.Medicamento == null, () =>
+            RuleFor(x => x.Funcionario)
+                .NotNull();
+
+            RuleFor(x => x.Paciente)
+                .NotNull();
+
+            When(r => r.Medicamento == null, () =>
             {
                 RuleFor(x => x.Medicamento)
-                    .NotNull().NotEmpty();
+                    .NotNull();
 
             }).Otherwise(() =>
+
             {
-                RuleFor(x => x.QtdMedicamento)
-                    .LessThanOrEqualTo(x => x.Medicamento.QuantidadeDisponivel);
+                RuleFor(x => x.QuantidadeMedicamento)
+                    .GreaterThan(0)
+                    .LessThan(x => x.Medicamento.QuantidadeDisponivel);
             });
-            
+
+            RuleFor(x => x.Data)
+                .NotEqual(DateTime.MinValue);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFuncionario
             funcionario = new Funcionario();
             funcionario.Nome = "Alberto Roberto";
             funcionario.Login = "albertoroberto";
-            funcionario.Senha = "321";
+            funcionario.Senha = "P@ssw0rd";
 
             repositorio = new RepositorioFuncionarioEmBancoDados();
         }
@@ -45,7 +45,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFuncionario
             //action
             funcionario.Nome = "Pedro Augusto";
             funcionario.Login = "pedro.augusto";
-            funcionario.Senha = "654";
+            funcionario.Senha = "P@ssw0rd";
 
             repositorio.Editar(funcionario);
 
@@ -88,9 +88,9 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFuncionario
         public void Deve_selecionar_todos_os_funcionarios()
         {
             //arrange
-            var funcionario1 = new Funcionario("Matheus de Souza", "matheus.souza", "321");
-            var funcionario2 = new Funcionario("Camila da Silva", "camila.silva", "654");
-            var funcionario3 = new Funcionario("Joana de Souza", "joana.souza", "987");
+            var funcionario1 = new Funcionario("Matheus de Souza", "matheus.souza", "P@ssw0rd");
+            var funcionario2 = new Funcionario("Camila da Silva", "camila.silva", "P@ssw0rd");
+            var funcionario3 = new Funcionario("Joana de Souza", "joana.souza", "P@ssw0rd");
 
             var repositorio = new RepositorioFuncionarioEmBancoDados();
             repositorio.Inserir(funcionario1);

@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 namespace ControleMedicamentos.Infra.BancoDados.ModuloMedicamento
 {
     public class MapeadorMedicamento : MapeadorBase<Medicamento>
-    {      
+    {
         public override void ConfigurarParametros(Medicamento registro, SqlCommand comando)
         {
             comando.Parameters.AddWithValue("ID", registro.Id);
